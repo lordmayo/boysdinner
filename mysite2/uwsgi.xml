@@ -1,0 +1,11 @@
+<uwsgi>
+    <pythonpath>/home/mayo/Documents/python/venv/mysite2/</pythonpath>
+    <pythonpath>/home/mayo/Documents/python/venv/mysite2/mysite/</pythonpath>
+    <chdir>/home/mayo/Documents/python/venv/mysite2/</chdir>
+    <plugin>python</plugin>
+    <callable>mysite</callable>
+<buffer-size>25535</buffer-size>
+    <app mountpoint="/">
+        <script>django_wsgi</script>
+    </app>
+</uwsgi>

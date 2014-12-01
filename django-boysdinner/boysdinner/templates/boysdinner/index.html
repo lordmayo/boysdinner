@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<!--
+	Alpha by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		{% load staticfiles %}
+		<title>Boys Dinner</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+		<script src="{% static 'js/jquery.min.js' %}"></script>
+		<script src="{% static 'js/jquery.dropotron.min.js' %}"></script>
+		<script src="{% static 'js/jquery.scrollgress.min.js' %}"></script>
+		<script src="{% static 'js/skel.min.js' %}"></script>
+		<script src="{% static 'js/skel-layers.min.js' %}"></script>
+		<script src="{% static 'js/init.js' %}"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-wide.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header">
+				<h1><a href="#">Boys dinner</a></h1>
+				<nav id="nav">
+					<ul>
+						<li><a href="#" class="icon fa-angle-down">Sign in</a>
+					<ul>
+						<li><a href="{% url 'boysdinner:results' voter_id=0 %}">Past results</a></li>
+					</ul>
+					</li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Main -->
+			<section id="main" class="container">
+				<header>
+					<h2>Welcome to Boys Dinner</h2>
+					<p>Conduct sign ins and updates below</p>
+				</header>
+				<div class="row">
+					<div class="12u">
+						
+						<!-- Form -->
+							<section class="box">
+								<h3>Sign in</h3>
+								{% if error_message %}<p><strong><font color="red">{{ error_message }}</font></strong></p>{% endif %}
+								<form method="post" action="{% url 'boysdinner:signin' %}" method="post">
+								{% csrf_token %}
+								{% if not is_current %}
+								{% for field in form1 %}
+								<div class="row uniform half ollapse-at-2">
+									<div class="6u">
+										{{ field }}
+									</div>
+								</div>
+								{% endfor %}
+								{% for field in form2 %}
+								<div class="row uniform half ollapse-at-2">
+									<div class="6u">
+										{{ field }}{{ field.label_tag }} 
+									</div>
+								</div>
+								{% endfor %}
+								{% endif %}
+								<div class="row uniform half collapse-at-2">
+									<div class="3u">
+											<input type="submit" value="Sign in" class="fit special" />
+									</div>
+								</div>
+								</form>
+								
+
+
+
+								<hr />
+								
+								<form action="{% url 'boysdinner:search_person'  %}" method="post">
+								{% csrf_token %}
+									<div class="row uniform half collapse-at-2">
+										<div class="9u">
+											{% for field in search_form %}
+												{{ field }}
+											{% endfor %}
+										</div>
+									</div>
+								</form>
+							</section>
+
+					</div>
+				</div>
+			</section>
+
+
+
+							
+		<!-- Footer -->
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="http://www.facebook.com/boysdinner" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+					<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+					<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://berserk.dyndns.tv">Mayo</a></li>
+				</ul>
+			</footer>
+
+	</body>
+</html>

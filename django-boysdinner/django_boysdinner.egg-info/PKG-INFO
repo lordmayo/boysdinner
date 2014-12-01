@@ -1,0 +1,52 @@
+Metadata-Version: 1.1
+Name: django-boysdinner
+Version: 0.1
+Summary: A simple Django app to conduct Web-based boysdinner.
+Home-page: http://www.example.com/
+Author: Your Name
+Author-email: lordmayo@gmail.com
+License: BSD License
+Description: =====
+        Boys Dinner
+        =====
+        
+        Boys Dinner is a web-based app that allows chefs to sign in with their
+        names and dish descriptions, then on a rotational basis vote for each 
+        other's dishes. It also stores historical voting data 
+        
+        
+        Detailed documentation is in the "docs" directory.
+        
+        Quick start
+        -----------
+        
+        1. Add "boysdinner" to your INSTALLED_APPS setting like this::
+        
+            INSTALLED_APPS = (
+                ...
+                'boysdinner',
+            )
+        
+        2. Include the boysdinner URLconf in your project urls.py like this::
+        
+            url(r'^boysdinner/', include('boysdinner.urls')),
+        
+        3. Run `python manage.py migrate` to create the boysdinner models.
+        
+        4. Start the development server and visit http://127.0.0.1:8000/admin/
+           to create users for admin/testing purposes  (you'll need the Admin app enabled).
+        
+        5. Visit http://127.0.0.1:8000/boysdinner/ to begin!
+        
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content

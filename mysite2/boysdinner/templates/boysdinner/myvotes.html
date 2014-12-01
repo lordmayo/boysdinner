@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<!--
+	Alpha by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		{% load staticfiles %}
+		<title>Boys Dinner</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+		<script src="{% static 'js/jquery.min.js' %}"></script>
+		<script src="{% static 'js/jquery.dropotron.min.js' %}"></script>
+		<script src="{% static 'js/jquery.scrollgress.min.js' %}"></script>
+		<script src="{% static 'js/skel.min.js' %}"></script>
+		<script src="{% static 'js/skel-layers.min.js' %}"></script>
+		<script src="{% static 'js/init.js' %}"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-wide.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header">
+				<h1><a href="{% url 'boysdinner:signin' %}">Boys Dinner</a></h1>
+				<nav id="nav">
+					<ul>
+						<li><a href="{% url 'boysdinner:signin' %}">Change status</a></h1>
+						<li>
+							<a href="{% url 'boysdinner:results' voter_id %}">Results</a>
+						</li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Main -->
+			<section id="main" class="container">
+				<header>
+					<h2>List of your votes</h2>
+					<p>Cast your ballot {{ voter_name|title }}!</p>
+				</header>
+				<div class="row">
+					<div class="12u">
+						
+						<!-- Form -->
+							<section class="box">
+
+								<section class="box">
+									{% if message %}
+										<h4><font color="red">{{ message }}</font></h4> 
+									{% else %}
+										<h3>Voting for <font color="red">{{ chef_name|title }}</font> in progress</h3> 
+										{% if error_message %}
+											<p><strong><font color="red">{{ error_message }} </font></strong></p>
+										{% else %}
+										<h3>&nbsp;</h3>
+									{% endif %}
+								</section>
+								<form action="{% url 'boysdinner:vote' voter_id %}" method="post">
+								{% csrf_token %}
+								{% for field in form0 %}
+									{% if field.is_hidden %}
+										{{ field.field_name.as_hidden }}
+									{% else %}
+										{{ field.label_tag }} 
+									{% endif %}
+									{{ field }}
+								{% endfor %}
+								<div class="row uniform">
+									<div class="12u">
+										<input type="submit" value="Vote" class="fit" />
+									</div>
+								</div>
+								</form>
+								{% endif %}
+
+
+
+
+								<div class="row">
+								<div class="12u">
+									<form action="{% url 'boysdinner:old_votes' voter_id pre_fix %}" method="post">
+									{% csrf_token %}
+									{% if old_votes_message %}
+									<h5>{{ old_votes_message }}</h5>
+									{% else %}
+									<hr>
+									<h3><center><strong>Old Votes</strong></center></h3>
+									<hr>
+										{% for bundle in vote_list %}
+											<h3><center>{{ bundle.details.done_chef_name|title }}'s {{ bundle.details.dish_name|title }}</center></h3>
+											{% for field in bundle.form %}
+													{% if field.is_hidden %}
+														{{ field.field_name.as_hidden }}
+													{% else %}
+														{{ field.label_tag }}
+													{% endif %}
+														{{ field }}
+											{% endfor %}
+											<div class="row uniform">
+												<div class="12u">
+													<input type="submit" value="Update" />
+												</div>
+											</div>
+											<hr>
+										{% endfor %}
+									</form>
+									{% endif %}
+								</div>
+								</div>
+
+							</section>
+
+					</div>
+				</div>
+				<div class="row">
+				</div>
+			</section>
+			
+		<!-- Footer -->
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="http://www.facebook.com/boysdinner" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+					<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+					<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://berserk.dyndns.tv">Mayo</a></li>
+				</ul>
+			</footer>
+
+	</body>
+</html>

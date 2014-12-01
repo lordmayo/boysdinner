@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>My current votes made</title>
+</head>
+<body>
+<a href="{% url 'boysdinner:signin' %}">Home</a> | 
+<a href="{% url 'boysdinner:results' voter_id %}">Results</a>
+<hr>
+<table>
+{% if message %}
+<h4><font color="red">{{ message }}</font></h4> 
+{% else %}
+<h4>Voting for <font color="red">{{ chef_name|title }}</font> in progress</h4> 
+{% if error_message %}<p><strong><font color="red">{{ error_message }} </font></strong></p>
+{% else %}
+<h4>&nbsp;</h4>
+{% endif %}
+<form action="{% url 'boysdinner:vote' voter_id %}" method="post">
+{% csrf_token %}
+{% for field in form0 %}
+<tr>
+{% if field.is_hidden %}
+<td>{{ field.field_name.as_hidden }}</td> 
+{% else %}
+<td>{{ field.label_tag }}</td> 
+{% endif %}
+<td>{{ field }}</td>
+</tr>
+{% endfor %}
+<tr><td><input type="submit" value="Vote" /></td><td>&nbsp;</td></tr>
+</form>
+{% endif %}
+<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td colspan=2 align=center><h4> Old votes</h4></td></tr>
+<form action="{% url 'boysdinner:old_votes' voter_id pre_fix %}" method="post">
+{% csrf_token %}
+{% if old_votes_message %}
+<h5>{{ old_votes_message }}</h5>
+{% else %}
+{% for form in vote_list %}
+<tr><td colspan="2"><hr></td></tr>
+{% for field in form %}
+
+
+<tr>
+{% if field.is_hidden %}
+<td>{{ field.field_name.as_hidden }}</td> 
+{% else %}
+<td>{{ field.label_tag }}</td> 
+{% endif %}
+<td>{{ field }}</td>
+</tr>
+
+{% endfor %}
+<tr><td><input type="submit" value="Update" /></td><td>&nbsp;</td></tr>
+{% endfor %}
+</form>
+{% endif %}
+</table>
+</body>
+</html>
